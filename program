@@ -1,0 +1,97 @@
+using System;
+using System.ComponentModel;
+using System.Runtime.ConstrainedExecution;
+
+namespace tictacttoe
+{
+    
+    class program
+{
+        public  static bool Check(string[] arr)
+
+        {
+            bool stop = false;
+            if (arr[1] == arr[2] && arr[2] == arr[3] || arr[4] == arr[5] && arr[5] == arr[6] || arr[7] == arr[8] && arr[8] == arr[9] || arr[1] == arr[4] && arr[4] == arr[7] || arr[2] == arr[5] && arr[5] == arr[8] || arr[3] == arr[6] && arr[6] == arr[9]) { Console.WriteLine("you won!"); stop = true; }
+
+            else if (arr[1] == arr[4] && arr[4] == arr[7] || arr[2] == arr[5] && arr[5] == arr[8] || arr[3] == arr[6] && arr[6] == arr[8] || arr[1] == arr[5] && arr[5] == arr[9] || arr[3] == arr[5] && arr[5] == arr[9]) { Console.WriteLine("you won"); stop = true; }
+            return stop;
+
+        }
+
+        public static void PrintBoard(string[] arr)
+        {
+            for (int i = 1; i < arr.Length; i++)
+            {
+                Console.Write(arr[i]);
+                if (i % 3 == 0)
+                {
+                    Console.WriteLine("");
+                }
+               
+            }
+        }
+        public static void Main(string[] args)
+        {
+            
+            bool stop = false;
+            int roundAnzahl = 0;
+            bool isTaken = false;
+            
+            
+            string[] arr = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            PrintBoard(arr);
+            
+
+            bool switchCharackter = true;
+            while (roundAnzahl < 9 &&stop ==false)
+            {
+               
+                
+
+                while (isTaken == false && stop == false)
+                {
+                    Console.WriteLine("lets play user1:x  chosse  beetween 1 to 9");
+                    var player1Input = Console.ReadLine();
+
+
+                   
+                    if (arr.Contains(player1Input))
+                    {
+                        if ( switchCharackter == true)
+                        {
+                            arr[Convert.ToInt32(player1Input)] = "x";
+                            
+                        }
+                        else
+                        {
+                            arr[Convert.ToInt32(player1Input)] = "o";
+                            
+                        }
+                        isTaken = true; roundAnzahl++; stop = Check(arr);
+                        
+                        PrintBoard(arr);
+
+
+
+                    }
+
+                    if (stop == true)
+                    {
+
+                    }
+                }
+                isTaken = false;
+                 switchCharackter = !switchCharackter;
+                
+            }
+            if (switchCharackter == true)
+            {
+                Console.WriteLine("o is winner");
+            }
+            else
+            {
+                Console.WriteLine("x is winner");
+            }
+        }
+    }
+}
